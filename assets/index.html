@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chatwick</title>
+    <link rel="stylesheet" href="" />
+  </head>
+
+  <body>
+    <div class="flex-grow flex-col overflow-auto">
+      <div class="flex-grow flex-col overflow-auto">
+        <div id="main-content" class="flex-grow flex-col margin-x-auto">
+          <h1 class="margin-x-auto">Chatwick</h1>
+          <main
+            id="chat-messages"
+            class="flex-grow flex flex-col overflow-auto"
+          >
+            <div class="flex flex-row chat-message">
+              <p class="chat-message-role"><strong>Assistant:</strong></p>
+              <p>
+                Hi there! I'm Chatwick. Ask me to alter anything on this
+                webpage, and I'll make it happen!<br /><br />Please describe
+                something you would like to add to this page.
+              </p>
+            </div>
+          </main>
+          <div id="chat-input-area" class="flex flex-row">
+            <input
+              id="user-input"
+              class="flex-grow"
+              type="text"
+              placeholder="Addition to page (press Enter to submit)"
+              autofocus
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    html {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+    h1 {
+      padding: 10px;
+    }
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .flex-grow {
+      flex-grow: 1;
+    }
+    .margin-x-auto {
+      margin: 0 auto;
+    }
+    #main-content {
+      max-width: 1000px;
+      width: 100%;
+      overflow: scroll;
+    }
+    .chat-message {
+      align-items: top;
+    }
+    .chat-message-role {
+      padding: 0 5px;
+      width: 90px;
+    }
+    .overflow-auto {
+      overflow: auto;
+    }
+    #chat-input-area {
+      padding: 5px;
+    }
+  </style>
+
+  <script type="text/javascript" src="index.js"></script>
+</html>
