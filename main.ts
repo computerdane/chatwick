@@ -43,7 +43,10 @@ Bun.serve({
             },
           ],
         })
-        .on("refusal.done", () => console.log("request refused"))
+        .on("refusal.done", () => {
+          readable.push("request refused");
+          readable.push(null);
+        })
         .on("content.delta", ({ delta }) => readable.push(delta))
         .on("content.done", () => readable.push(null));
       return new Response(readable);
