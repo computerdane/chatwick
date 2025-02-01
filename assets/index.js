@@ -13,7 +13,7 @@ async function onUserInputKeydown(e) {
     UserInput.value = "";
 
     const pageHtml = document.documentElement.outerHTML;
-    const res = await fetch("http://localhost:3000/generate", {
+    const res = await fetch("/generate", {
       method: "POST",
       body: pageHtml,
     });
