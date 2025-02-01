@@ -4,8 +4,12 @@ async function onUserInputKeydown(e) {
     UserInput.removeEventListener("keydown", onUserInputKeydown);
 
     const ChatMessages = document.querySelector("#chat-messages");
-    ChatMessages.innerHTML +=
-      '<div class="flex flex-row chat-message"><p class="chat-message-role"><strong>User:</strong></p><p id="latest-message"></p></div>';
+    ChatMessages.innerHTML += `        <div style="display: flex; align-items: top">
+          <p style="padding-right: 1em"><strong>User:</strong></p>
+          <p id="latest-message"></p>
+        </div>
+`;
+
     const LatestMessage = document.querySelector("#latest-message");
     LatestMessage.innerText = UserInput.value;
     LatestMessage.removeAttribute("id");
@@ -32,13 +36,34 @@ async function onUserInputKeydown(e) {
       Page.innerHTML = content;
     }
 
-    {
-      const UserInput = document.querySelector("#user-input");
-      UserInput.addEventListener("keydown", onUserInputKeydown);
-      UserInput.focus();
+    function makeScript(node) {
+      const script = document.createElement("script");
+      script.text = node.innerHTML;
+      for (const attr of node.attributes) {
+        script.setAttribute(attr.name, attr.value);
+      }
+      return script;
     }
+
+    function makeScriptsExecutable(node) {
+      if (node.tagName === "SCRIPT") {
+        node.parentNode.replaceChild(makeScript(node), node);
+      } else {
+        for (const child of node.childNodes) {
+          makeScriptsExecutable(child);
+        }
+      }
+    }
+
+    const Body = document.getElementsByTagName("body")[0];
+    makeScriptsExecutable(Body);
+
+    const UserInput2 = document.querySelector("#user-input");
+    UserInput2.addEventListener("keydown", onUserInputKeydown);
+    UserInput2.focus();
   }
 }
 
-const UserInput = document.querySelector("#user-input");
-UserInput.addEventListener("keydown", onUserInputKeydown);
+document
+  .querySelector("#user-input")
+  .addEventListener("keydown", onUserInputKeydown);
