@@ -1,8 +1,18 @@
 import { Readable } from "node:stream";
 import OpenAI from "openai";
-const openai = new OpenAI();
 
+if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.OPENAI_API_KEY_FILE) {
+    throw new Error(
+      "One of the following environment variables must bet set: OPENAI_API_KEY OPENAI_API_KEY_FILE",
+    );
+  }
+  const key = await Bun.file(process.env.OPENAI_API_KEY_FILE).text();
+  process.env["OPENAI_API_KEY"] = key.trim();
+}
 const port = parseInt(process.env.PORT ?? "3000");
+
+const openai = new OpenAI();
 
 Bun.serve({
   port,
